@@ -41,6 +41,10 @@ def validate_entry(text: str) -> str:
     """Check the text is one sentence the gate will accept."""
     if not text or not text.strip():
         raise ValueError("entry is empty or only whitespace")
+    if text != text.strip():
+        raise ValueError("entry has leading or trailing whitespace")
+    if "  " in text:
+        raise ValueError("entry contains a double space")
     if len(text) < MIN_LENGTH or len(text) > MAX_LENGTH:
         raise ValueError(
             f"entry is {len(text)} chars, outside the 1-200 char range"
